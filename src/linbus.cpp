@@ -189,7 +189,7 @@ int linbus::sleep(uint8_t sleep_state)
     else if (sleep_state == 0)
     {
     }
-    Sleep(20); // According to TJA1021 datasheet this is needed for proper working
+    Delay(20); // According to TJA1021 datasheet this is needed for proper working
     return 1;
 }
 

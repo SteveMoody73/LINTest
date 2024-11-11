@@ -30,8 +30,8 @@ class linbus
 		const unsigned long baud_rate = 19200;                     // 10417 is best for LIN Interface, most device should work
         const uint8_t SYNC_BYTE = 0x55;
 		uint8_t identByte;                                          // user defined Identification Byte
-        int linbus::sleep(uint8_t sleep_state);                     // Set the transcieve sleep state (CS)
-        int linbus::sleep_config();                                 // Configure the sleep pin (CS)  
+        int sleep(uint8_t sleep_state);                     // Set the transcieve sleep state (CS)
+        int sleep_config();                                 // Configure the sleep pin (CS)  
 
         void send_break();                              // for generating Synch Break
 		bool validateParity(uint8_t ident);                         // for validating Identification Byte, can be modified for validating parity
