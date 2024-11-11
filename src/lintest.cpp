@@ -36,7 +36,7 @@ void enumerate_ports()
 
 void print_usage()
 {
-      printf("Usage: lintest {-e|<serial port address>} ";
+      printf("Usage: lintest {-e|<serial port address>} ");
 }
 
 int main(int argc, char **argv)
@@ -67,59 +67,13 @@ int main(int argc, char **argv)
             return 0;
         }
 
-            size_t bytes_wrote = my_serial.write(test_string);
 
-        // Test the timeout at 250ms
-        my_serial.setTimeout(serial::Timeout::max(), 250, 0, 250, 0);
-        count = 0;
-        cout << "Timeout == 250ms, asking for 1 more byte than written." << endl;
-        while (count < 10)
-        {
-            size_t bytes_wrote = my_serial.write(test_string);
-
-            string result = my_serial.read(test_string.length() + 1);
-
-            cout << "Iteration: " << count << ", Bytes written: ";
-            cout << bytes_wrote << ", Bytes read: ";
-            cout << result.length() << ", String read: " << result << endl;
-
-            count += 1;
-        }
-
-        // Test the timeout at 250ms, but asking exactly for what was written
-        count = 0;
-        cout << "Timeout == 250ms, asking for exactly what was written." << endl;
-        while (count < 10)
-        {
-            size_t bytes_wrote = my_serial.write(test_string);
-
-            string result = my_serial.read(test_string.length());
-
-            cout << "Iteration: " << count << ", Bytes written: ";
-            cout << bytes_wrote << ", Bytes read: ";
-            cout << result.length() << ", String read: " << result << endl;
-
-            count += 1;
-        }
-
-        // Test the timeout at 250ms, but asking for 1 less than what was written
-        count = 0;
-        cout << "Timeout == 250ms, asking for 1 less than was written." << endl;
-        while (count < 10)
-        {
-            size_t bytes_wrote = my_serial.write(test_string);
-
-            string result = my_serial.read(test_string.length() - 1);
-
-            cout << "Iteration: " << count << ", Bytes written: ";
-            cout << bytes_wrote << ", Bytes read: ";
-            cout << result.length() << ", String read: " << result << endl;
-
-            count += 1;
-        }
+        my_serial.close();
     }
-    catch (exception &e)
+    catch (std::exception &e)
     {
-        cerr << "Unhandled Exception: " << e.what() << endl;
+        printf("Unhandled Exception: %s\n", e.what());
     }
+
+    return 0;
 }

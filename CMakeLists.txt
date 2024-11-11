@@ -43,7 +43,7 @@ else()
 endif()
 
 ## Uncomment for example
-add_executable(lintest src/lintest.cpp)
+add_executable(lintest src/lintest.cpp src/linbus.cpp)
 add_dependencies(lintest ${PROJECT_NAME})
 target_link_libraries(lintest ${PROJECT_NAME})
 
