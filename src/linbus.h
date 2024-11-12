@@ -8,12 +8,12 @@
 #include <unistd.h>
 #endif
 
-class linbus
+class LINBus
 {
 	public:
 		// Constructors
-		linbus(serial::Serial *serial);					// Constructor for Master Node
-		linbus(serial::Serial *serial, uint8_t ident);	// Constructor for Slave Node
+		LINBus(serial::Serial *serial);					// Constructor for Master Node
+		LINBus(serial::Serial *serial, uint8_t ident);	// Constructor for Slave Node
 				
 		// Writing data to bus
 		int write(uint8_t add, uint8_t *data, uint8_t data_size);	// write whole package

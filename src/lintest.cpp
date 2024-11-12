@@ -10,6 +10,7 @@
 #endif
 
 #include "serial/serial.h"
+#include "linbus.h"
 
 void my_sleep(unsigned long milliseconds)
 {
@@ -59,16 +60,19 @@ int main(int argc, char **argv)
         }
 
         // port, baudrate, timeout in milliseconds
-        serial::Serial my_serial(port, 19200, serial::Timeout::simpleTimeout(1000));
+        serial::Serial serial_port(port, 19200, serial::Timeout::simpleTimeout(1000));
 
-        if (!my_serial.isOpen())
+        if (!serial_port.isOpen())
         {
             printf("Unable to open serial port %s\n", argv[1]);
             return 0;
         }
 
+        uint8_t lindata[] = { 31, 255, 0, 0, 3 };
+        LINBus lin(&serial_port);
+        lin.write(0xA3, lindata, 5);
 
-        my_serial.close();
+        serial_port.close();
     }
     catch (std::exception &e)
     {
